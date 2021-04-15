@@ -1,0 +1,991 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Email ROI Calculator</title>
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;700&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="src/font-awesome.min.css" type="text/css" />
+        <link rel="stylesheet" href="src/style.css" type="text/css" />
+        <link rel="stylesheet" href="src/responsive.css" type="text/css" />
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script src="src/webinar-roi-calculator.js"></script>
+    </head>
+    <body>
+        <div class="page">
+            <div class="container">
+                <div class="calculator_wrap">
+                    <h1>Email ROI Calculator</h1>
+                    <div class="currency_wrap">
+                        <div class="calc_field">
+                            <label class="calc_label">Currency</label>
+                            <div class="calc_field_wrap medium_3">
+                                <select class="calc_input" id="currency">
+                                    <option value="EUR" selected="selected">EUR</option>
+                                    <option value="USD">USD</option>
+                                    <option value="GBP">GBP</option>
+                                    <option value="AED">AED</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="calc_details_wrap">
+                        <div class="calc_form">
+                            <h2>
+                                Program Cost
+                                <span>Program cost details go here</span>
+                            </h2>
+                            <div class="calc_field">
+                                <label class="calc_label"
+                                    >Number of webinars per month</label
+                                >
+                                <div class="calc_field_wrap">
+                                    <input
+                                        class="calc_input"
+                                        type="number"
+                                        value="1"
+                                        placeholder="Number of webinars per month"
+                                        id="webinars-per-month"
+                                    />
+                                </div>
+                            </div>
+                            <div class="calc_field">
+                                <label class="calc_label"
+                                    >Average duration of webinars in minutes</label
+                                >
+                                <div class="calc_field_wrap">
+                                    <input
+                                        class="calc_input"
+                                        type="number"
+                                        value="90"
+                                        placeholder="Average duration of webinars in minutes"
+                                        id="webinars-avg-duration"
+                                        min="0"
+                                        step="0.1"
+                                    />
+                                </div>
+                            </div>
+                            <div class="calc_field">
+                                <label class="calc_label">
+                                    Average Revenue per deal (<span
+                                        class="calc_currency currency_symbol"
+                                        >€</span
+                                    >)
+                                </label>
+                                <div class="calc_field_wrap">
+                                    <input
+                                        class="calc_input currency_field"
+                                        type="text"
+                                        value="1000"
+                                        placeholder="Average Revenue per deal"
+                                        id="avg-revenue-per-deal"
+                                        data-val="1000"
+                                    />
+                                </div>
+                            </div>
+                            <div class="calc_field small">
+                                <label class="calc_label"
+                                    >Average duration of webinar project</label
+                                >
+                                <div class="calc_field_wrap">
+                                    <input
+                                        class="calc_input"
+                                        type="number"
+                                        value="3"
+                                        placeholder="Average duration of webinar project"
+                                        id="webinar-project-avg-duration"
+                                        min="0"
+                                    />
+                                </div>
+                            </div>
+                            <div class="calc_field small">
+                                <label class="calc_label">Time Unit</label>
+                                <div class="calc_field_wrap medium_5">
+                                    <select
+                                        class="calc_input"
+                                        id="webinar-project-avg-duration-unit"
+                                    >
+                                        <option value="years">Years</option>
+                                        <option value="months" selected="selected">
+                                            Months
+                                        </option>
+                                        <option value="days">Days</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <h2>Technology Cost</h2>
+
+                            <div class="calc_field">
+                                <label class="calc_label">
+                                    Webinar licence cost (<span
+                                        class="calc_currency currency_symbol"
+                                        >€</span
+                                    >)
+                                    <span class="tooltip_wrap">
+                                        <button type="button">
+                                            <i class="fa fa-question"></i>
+                                        </button>
+                                        <span class="tooltext">cost per month</span>
+                                    </span>
+                                </label>
+                                <div class="calc_field_wrap">
+                                    <input
+                                        class="calc_input currency_field"
+                                        type="text"
+                                        value="399"
+                                        placeholder="Webinar licence cost"
+                                        id="webinar-licence-cost"
+                                        data-val="399"
+                                    />
+                                </div>
+                            </div>
+                            <div class="calc_field">
+                                <label class="calc_label">
+                                    Conference recording cost (<span
+                                        class="calc_currency currency_symbol"
+                                        >€</span
+                                    >)
+                                    <span class="tooltip_wrap">
+                                        <button type="button">
+                                            <i class="fa fa-question"></i>
+                                        </button>
+                                        <span class="tooltext">cost per minute</span>
+                                    </span>
+                                </label>
+                                <div class="calc_field_wrap">
+                                    <input
+                                        class="calc_input currency_field"
+                                        type="text"
+                                        value="0.10"
+                                        placeholder="Conference recording cost"
+                                        id="conf-recording-cost"
+                                        data-val="0.10"
+                                    />
+                                </div>
+                            </div>
+                            <div class="calc_field">
+                                <label class="calc_label">
+                                    Archived recording cost (<span
+                                        class="calc_currency currency_symbol"
+                                        >€</span
+                                    >)
+                                    <span class="tooltip_wrap">
+                                        <button type="button">
+                                            <i class="fa fa-question"></i>
+                                        </button>
+                                        <span class="tooltext">cost per minute</span>
+                                    </span>
+                                </label>
+                                <div class="calc_field_wrap">
+                                    <input
+                                        class="calc_input currency_field"
+                                        type="text"
+                                        value="0.20"
+                                        placeholder="Archived recording cost"
+                                        id="archived-recording-cost"
+                                        data-val="0.20"
+                                    />
+                                </div>
+                            </div>
+
+                            <h2>Promotion Cost</h2>
+
+                            <div class="calc_field">
+                                <label class="calc_label">
+                                    Banner AD spend (<span
+                                        class="calc_currency currency_symbol"
+                                        >€</span
+                                    >)
+                                    <span class="tooltip_wrap">
+                                        <button type="button">
+                                            <i class="fa fa-question"></i>
+                                        </button>
+                                        <span class="tooltext">cost per webinar</span>
+                                    </span>
+                                </label>
+                                <div class="calc_field_wrap">
+                                    <input
+                                        class="calc_input currency_field"
+                                        type="text"
+                                        value="500"
+                                        placeholder="Banner AD spend"
+                                        id="banner-ad-spend"
+                                        data-val="500"
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="calc_field">
+                                <label class="calc_label">
+                                    Google AD spend (<span
+                                        class="calc_currency currency_symbol"
+                                        >€</span
+                                    >)
+                                    <span class="tooltip_wrap">
+                                        <button type="button">
+                                            <i class="fa fa-question"></i>
+                                        </button>
+                                        <span class="tooltext">cost per webinar</span>
+                                    </span>
+                                </label>
+                                <div class="calc_field_wrap">
+                                    <input
+                                        class="calc_input currency_field"
+                                        type="text"
+                                        value="500"
+                                        placeholder="Google AD spend"
+                                        id="google-ad-spend"
+                                        data-val="500"
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="calc_field">
+                                <label class="calc_label">
+                                    Social Media campaign spend (<span
+                                        class="calc_currency currency_symbol"
+                                        >€</span
+                                    >)
+                                    <span class="tooltip_wrap">
+                                        <button type="button">
+                                            <i class="fa fa-question"></i>
+                                        </button>
+                                        <span class="tooltext">cost per webinar</span>
+                                    </span>
+                                </label>
+                                <div class="calc_field_wrap">
+                                    <input
+                                        class="calc_input currency_field"
+                                        type="text"
+                                        value="200"
+                                        placeholder="Social Media campaign spend"
+                                        id="social-media-campaign-spend"
+                                        data-val="200"
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="calc_field">
+                                <label class="calc_label">
+                                    Direct e-mail spend (<span
+                                        class="calc_currency currency_symbol"
+                                        >€</span
+                                    >)
+                                    <span class="tooltip_wrap">
+                                        <button type="button">
+                                            <i class="fa fa-question"></i>
+                                        </button>
+                                        <span class="tooltext">cost per webinar</span>
+                                    </span>
+                                </label>
+                                <div class="calc_field_wrap">
+                                    <input
+                                        class="calc_input currency_field"
+                                        type="text"
+                                        value="12"
+                                        placeholder="Direct e-mail spend"
+                                        id="direct-email-spend"
+                                        data-val="12"
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="calc_field">
+                                <label class="calc_label">
+                                    Promotional e-mail spend (<span
+                                        class="calc_currency currency_symbol"
+                                        >€</span
+                                    >)
+                                    <span class="tooltip_wrap">
+                                        <button type="button">
+                                            <i class="fa fa-question"></i>
+                                        </button>
+                                        <span class="tooltext">cost per webinar</span>
+                                    </span>
+                                </label>
+                                <div class="calc_field_wrap">
+                                    <input
+                                        class="calc_input currency_field"
+                                        type="text"
+                                        value="100"
+                                        placeholder="Promotional e-mail spend"
+                                        id="promo-email-spend"
+                                        data-val="100"
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="calc_field">
+                                <label class="calc_label">
+                                    E-mail list purchase (<span
+                                        class="calc_currency currency_symbol"
+                                        >€</span
+                                    >)
+                                    <span class="tooltip_wrap">
+                                        <button type="button">
+                                            <i class="fa fa-question"></i>
+                                        </button>
+                                        <span class="tooltext">cost per webinar</span>
+                                    </span>
+                                </label>
+                                <div class="calc_field_wrap">
+                                    <input
+                                        class="calc_input currency_field"
+                                        type="text"
+                                        value="100"
+                                        placeholder="E-mail list purchase"
+                                        id="email-list-purchase"
+                                        data-val="100"
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="calc_field">
+                                <label class="calc_label">
+                                    Partners sponsoring (<span
+                                        class="calc_currency currency_symbol"
+                                        >€</span
+                                    >)
+                                    <span class="tooltip_wrap">
+                                        <button type="button">
+                                            <i class="fa fa-question"></i>
+                                        </button>
+                                        <span class="tooltext">cost per webinar</span>
+                                    </span>
+                                </label>
+                                <div class="calc_field_wrap">
+                                    <input
+                                        class="calc_input currency_field"
+                                        type="text"
+                                        value="2500"
+                                        placeholder="Partners sponsoring"
+                                        id="partners-sponsoring"
+                                        data-val="2500"
+                                    />
+                                </div>
+                            </div>
+
+                            <h2>Staff Cost</h2>
+
+                            <div class="calc_field">
+                                <label class="calc_label">
+                                    Average salary per employee (<span
+                                        class="calc_currency currency_symbol"
+                                        >€</span
+                                    >)
+                                    <span class="tooltip_wrap">
+                                        <button type="button">
+                                            <i class="fa fa-question"></i>
+                                        </button>
+                                        <span class="tooltext">monthly salary</span>
+                                    </span>
+                                </label>
+                                <div class="calc_field_wrap">
+                                    <input
+                                        class="calc_input currency_field"
+                                        type="text"
+                                        value="5000"
+                                        placeholder="Average salary per employee"
+                                        id="staff-avg-salary"
+                                        data-val="5000"
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="calc_field">
+                                <label class="calc_label">
+                                    Number of employees working on webinar
+                                </label>
+                                <div class="calc_field_wrap">
+                                    <input
+                                        class="calc_input"
+                                        type="number"
+                                        value="2"
+                                        placeholder="Number of employees working on webinar"
+                                        id="staff-employees-working-on-webinar"
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="calc_field">
+                                <label class="calc_label">
+                                    Average time spent on webinar deployment per employee
+                                    <span class="tooltip_wrap">
+                                        <button type="button">
+                                            <i class="fa fa-question"></i>
+                                        </button>
+                                        <span class="tooltext">time in hours</span>
+                                    </span>
+                                </label>
+                                <div class="calc_field_wrap">
+                                    <input
+                                        class="calc_input"
+                                        type="number"
+                                        value="10"
+                                        placeholder="Average time spent on webinar deployment per employee"
+                                        id="staff-avg-time-webinar-deployment"
+                                    />
+                                </div>
+                            </div>
+
+                            <h2>Last Webinar Assumptions</h2>
+
+                            <div class="calc_field">
+                                <label class="calc_label">Number of subscribers</label>
+                                <div class="calc_field_wrap">
+                                    <input
+                                        class="calc_input"
+                                        type="number"
+                                        value="100000"
+                                        placeholder="Number of subscribers"
+                                        id="subscribers"
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="calc_field">
+                                <label class="calc_label">E-mail openings rate (%)</label>
+                                <div class="calc_field_wrap">
+                                    <input
+                                        class="calc_input"
+                                        type="number"
+                                        value="19.7"
+                                        placeholder="E-mail openings rate"
+                                        id="email-open-rate"
+                                        step="0.1"
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="calc_field">
+                                <label class="calc_label">Click through rate (%)</label>
+                                <div class="calc_field_wrap">
+                                    <input
+                                        class="calc_input"
+                                        type="number"
+                                        value="3.6"
+                                        placeholder="Click through rate"
+                                        id="click-through-rate"
+                                        step="0.1"
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="calc_field">
+                                <label class="calc_label">Registration rate (%)</label>
+                                <div class="calc_field_wrap">
+                                    <input
+                                        class="calc_input"
+                                        type="number"
+                                        value="35"
+                                        placeholder="Registration rate"
+                                        id="registration-rate"
+                                        step="0.1"
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="calc_field">
+                                <label class="calc_label">Attendance rate (%)</label>
+                                <div class="calc_field_wrap">
+                                    <input
+                                        class="calc_input"
+                                        type="number"
+                                        value="40"
+                                        placeholder="Attendance rate"
+                                        id="attendance-rate"
+                                        step="0.1"
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="calc_field">
+                                <label class="calc_label"
+                                    >Conversion to marketing qualified leads rate
+                                    (%)</label
+                                >
+                                <div class="calc_field_wrap">
+                                    <input
+                                        class="calc_input"
+                                        type="number"
+                                        value="75"
+                                        placeholder="Conversion to marketing qualified leads rate"
+                                        id="conversion-marketing-leads-rate"
+                                        step="0.1"
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="calc_field">
+                                <label class="calc_label"
+                                    >Conversion to sales qualified leads rate (%)</label
+                                >
+                                <div class="calc_field_wrap">
+                                    <input
+                                        class="calc_input"
+                                        type="number"
+                                        value="25"
+                                        placeholder="Conversion to sales qualified leads rate"
+                                        id="conversion-sales-leads-rate"
+                                        step="0.1"
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="calc_field">
+                                <label class="calc_label"
+                                    >Conversion opportinuities rate (%)</label
+                                >
+                                <div class="calc_field_wrap">
+                                    <input
+                                        class="calc_input"
+                                        type="number"
+                                        value="30"
+                                        placeholder="Conversion opportinuities rate"
+                                        id="conversion-opportunities-rate"
+                                        step="0.1"
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="calc_field">
+                                <label class="calc_label"
+                                    >Conversion to closed deal rate (%)</label
+                                >
+                                <div class="calc_field_wrap">
+                                    <input
+                                        class="calc_input"
+                                        type="number"
+                                        value="40"
+                                        placeholder="Conversion to closed deal rate"
+                                        id="conversion-closed-deal-rate"
+                                        step="0.1"
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="calc_field submit_wrap">
+                                <button
+                                    type="submit"
+                                    class="calc_form_submit"
+                                    id="calculate_webinar_roi"
+                                >
+                                    Calculate
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="calc_form result">
+                            <h2>Results</h2>
+                            <h3>
+                                Technology
+                                <span>Technology results details go here</span>
+                            </h3>
+
+                            <div class="calc_field">
+                                <div class="calc_field">
+                                    <label class="calc_label">
+                                        Total webinar licence cost (<span
+                                            class="calc_currency currency_symbol"
+                                            >€</span
+                                        >)
+                                    </label>
+                                </div>
+                                <div class="calc_result_value">
+                                    <span id="result-webinar-licence-cost">0</span>
+                                </div>
+                            </div>
+
+                            <div class="calc_field border">
+                                <div class="calc_field">
+                                    <label class="calc_label">
+                                        Total conference recording cost (<span
+                                            class="calc_currency currency_symbol"
+                                            >€</span
+                                        >)
+                                    </label>
+                                </div>
+                                <div class="calc_result_value">
+                                    <span id="result-conf-recording-cost">0</span>
+                                </div>
+                            </div>
+
+                            <div class="calc_field border">
+                                <div class="calc_field">
+                                    <label class="calc_label">
+                                        Archived recording cost (<span
+                                            class="calc_currency currency_symbol"
+                                            >€</span
+                                        >)
+                                    </label>
+                                </div>
+                                <div class="calc_result_value">
+                                    <span id="result-archived-recording-cost">0</span>
+                                </div>
+                            </div>
+
+                            <div class="calc_field border">
+                                <div class="calc_field">
+                                    <label class="calc_label">
+                                        Total technology cost (<span
+                                            class="calc_currency currency_symbol"
+                                            >€</span
+                                        >)
+                                        <span class="tooltip_wrap">
+                                            <button type="button">
+                                                <i class="fa fa-question"></i>
+                                            </button>
+                                            <span class="tooltext"
+                                                >Monthly total cost</span
+                                            >
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="calc_result_value">
+                                    <span id="result-technology-total-cost">0</span>
+                                </div>
+                            </div>
+
+                            <h3 class="border">
+                                Promotion
+                                <span>Promotion results details go here</span>
+                            </h3>
+
+                            <div class="calc_field border">
+                                <div class="calc_field">
+                                    <label class="calc_label">
+                                        Total banner AD spend (<span
+                                            class="calc_currency currency_symbol"
+                                            >€</span
+                                        >)
+                                    </label>
+                                </div>
+                                <div class="calc_result_value">
+                                    <span id="result-banner-ad-spend">0</span>
+                                </div>
+                            </div>
+
+                            <div class="calc_field border">
+                                <div class="calc_field">
+                                    <label class="calc_label">
+                                        Total Google AD spend (<span
+                                            class="calc_currency currency_symbol"
+                                            >€</span
+                                        >)
+                                    </label>
+                                </div>
+                                <div class="calc_result_value">
+                                    <span id="result-google-ad-spend">0</span>
+                                </div>
+                            </div>
+
+                            <div class="calc_field border">
+                                <div class="calc_field">
+                                    <label class="calc_label">
+                                        Total social media campaign spend(<span
+                                            class="calc_currency currency_symbol"
+                                            >€</span
+                                        >)
+                                    </label>
+                                </div>
+                                <div class="calc_result_value">
+                                    <span id="result-social-media-campaign-spend">0</span>
+                                </div>
+                            </div>
+
+                            <div class="calc_field border">
+                                <div class="calc_field">
+                                    <label class="calc_label">
+                                        Total direct e-mail spend (<span
+                                            class="calc_currency currency_symbol"
+                                            >€</span
+                                        >)
+                                    </label>
+                                </div>
+                                <div class="calc_result_value">
+                                    <span id="result-direct-email-spend">0</span>
+                                </div>
+                            </div>
+
+                            <div class="calc_field border">
+                                <div class="calc_field">
+                                    <label class="calc_label">
+                                        Total promotional e-mail spend (<span
+                                            class="calc_currency currency_symbol"
+                                            >€</span
+                                        >)
+                                    </label>
+                                </div>
+                                <div class="calc_result_value">
+                                    <span id="result-promo-email-spend">0</span>
+                                </div>
+                            </div>
+
+                            <div class="calc_field border">
+                                <div class="calc_field">
+                                    <label class="calc_label">
+                                        Total e-mail list purchase(<span
+                                            class="calc_currency currency_symbol"
+                                            >€</span
+                                        >)
+                                    </label>
+                                </div>
+                                <div class="calc_result_value">
+                                    <span id="result-email-list-purchase">0</span>
+                                </div>
+                            </div>
+
+                            <div class="calc_field border">
+                                <div class="calc_field">
+                                    <label class="calc_label">
+                                        Total partners sponsoring (<span
+                                            class="calc_currency currency_symbol"
+                                            >€</span
+                                        >)
+                                    </label>
+                                </div>
+                                <div class="calc_result_value">
+                                    <span id="result-partners-sponsoring">0</span>
+                                </div>
+                            </div>
+
+                            <div class="calc_field border">
+                                <div class="calc_field">
+                                    <label class="calc_label">
+                                        Total promotion cost (<span
+                                            class="calc_currency currency_symbol"
+                                            >€</span
+                                        >)
+                                    </label>
+                                </div>
+                                <div class="calc_result_value">
+                                    <span id="result-promotion-total-cost">0</span>
+                                </div>
+                            </div>
+
+                            <h3 class="border">Staff</h3>
+
+                            <div class="calc_field border">
+                                <div class="calc_field">
+                                    <label class="calc_label">
+                                        Average hourly rate(<span
+                                            class="calc_currency currency_symbol"
+                                            >€</span
+                                        >)
+                                    </label>
+                                </div>
+                                <div class="calc_result_value">
+                                    <span id="result-staff-avg-hourly-rate">0</span>
+                                </div>
+                            </div>
+
+                            <div class="calc_field border">
+                                <div class="calc_field">
+                                    <label class="calc_label">
+                                        Total staff cost (<span
+                                            class="calc_currency currency_symbol"
+                                            >€</span
+                                        >)
+                                    </label>
+                                </div>
+                                <div class="calc_result_value">
+                                    <span id="result-staff-total-cost">0</span>
+                                </div>
+                            </div>
+                            <h3 class="border">Webinar Results</h3>
+
+                            <div class="calc_field border">
+                                <div class="calc_field">
+                                    <label class="calc_label">
+                                        Number of email openings
+                                    </label>
+                                </div>
+                                <div class="calc_result_value">
+                                    <span id="result-email-open-number">0</span>
+                                </div>
+                            </div>
+
+                            <div class="calc_field border">
+                                <div class="calc_field">
+                                    <label class="calc_label">
+                                        Click through number
+                                    </label>
+                                </div>
+                                <div class="calc_result_value">
+                                    <span id="result-click-through-number">0</span>
+                                </div>
+                            </div>
+
+                            <div class="calc_field border">
+                                <div class="calc_field">
+                                    <label class="calc_label">
+                                        Number of registrations
+                                    </label>
+                                </div>
+                                <div class="calc_result_value">
+                                    <span id="result-registration-number">0</span>
+                                </div>
+                            </div>
+
+                            <div class="calc_field border">
+                                <div class="calc_field">
+                                    <label class="calc_label"> Attendance number </label>
+                                </div>
+                                <div class="calc_result_value">
+                                    <span id="result-attendance-number">0</span>
+                                </div>
+                            </div>
+
+                            <div class="calc_field border">
+                                <div class="calc_field">
+                                    <label class="calc_label">
+                                        Number of conversions to marketing qualified leads
+                                    </label>
+                                </div>
+                                <div class="calc_result_value">
+                                    <span id="result-conversion-marketing-leads-number"
+                                        >0</span
+                                    >
+                                </div>
+                            </div>
+
+                            <div class="calc_field border">
+                                <div class="calc_field">
+                                    <label class="calc_label">
+                                        Number of conversions to sales qualified leads
+                                    </label>
+                                </div>
+                                <div class="calc_result_value">
+                                    <span id="result-conversion-sales-leads-number"
+                                        >0</span
+                                    >
+                                </div>
+                            </div>
+
+                            <div class="calc_field border">
+                                <div class="calc_field">
+                                    <label class="calc_label">
+                                        Number of conversions opportunities
+                                    </label>
+                                </div>
+                                <div class="calc_result_value">
+                                    <span id="result-conversion-opportunities-number"
+                                        >0</span
+                                    >
+                                </div>
+                            </div>
+
+                            <div class="calc_field border">
+                                <div class="calc_field">
+                                    <label class="calc_label">
+                                        Number of conversions to closed deal
+                                    </label>
+                                </div>
+                                <div class="calc_result_value">
+                                    <span id="result-conversion-closed-deal-number"
+                                        >0</span
+                                    >
+                                </div>
+                            </div>
+
+                            <div class="calc_field border">
+                                <div class="calc_field">
+                                    <label class="calc_label">
+                                        Deal closed to attendance ratio (%)
+                                    </label>
+                                </div>
+                                <div class="calc_result_value">
+                                    <span id="result-closed-deal-to-attendance-ratio"
+                                        >0 %</span
+                                    >
+                                </div>
+                            </div>
+
+                            <div class="calc_field background">
+                                <label class="calc_label">
+                                    Total webinar cost (<span
+                                        class="calc_currency currency_symbol"
+                                        >€</span
+                                    >)
+                                </label>
+                                <div class="calc_result_value">
+                                    <span class="" id="result-webinar-total-cost">0</span>
+                                </div>
+                            </div>
+
+                            <h3>Webinar ROI</h3>
+
+                            <div class="calc_field">
+                                <div class="calc_field">
+                                    <label class="calc_label"
+                                        >Gross revenue acquired from webinar leads (<span
+                                            class="calc_currency currency_symbol"
+                                            >€</span
+                                        >)</label
+                                    >
+                                </div>
+                                <div class="calc_result_value">
+                                    <span id="result-gross-revenue-from-leads">0</span>
+                                </div>
+                            </div>
+
+                            <div class="calc_field border">
+                                <div class="calc_field">
+                                    <label class="calc_label"
+                                        >Profit (<span
+                                            class="calc_currency currency_symbol"
+                                            >€</span
+                                        >)</label
+                                    >
+                                </div>
+                                <div class="calc_result_value">
+                                    <span id="result-profit">0</span>
+                                </div>
+                            </div>
+
+                            <div class="calc_field background">
+                                <label class="calc_label">
+                                    Retun on investment (ROI) (%)
+                                </label>
+                                <div class="calc_result_value">
+                                    <span class="" id="result-roi">0%</span>
+                                </div>
+                            </div>
+
+                            <div class="calc_field">
+                                <label class="calc_label">Annualized ROI (%)</label>
+                                <div class="calc_result_value">
+                                    <span id="result-annualized-roi">0%</span>
+                                </div>
+                            </div>
+
+                            <div class="calc_field border">
+                                <label class="calc_label"
+                                    >Number of closed deals to break even</label
+                                >
+                                <div class="calc_result_value">
+                                    <span id="result-closed-deals-number-even">0</span>
+                                </div>
+                            </div>
+
+                            <div class="calc_field border">
+                                <label class="calc_label"
+                                    >Number of attendants to break even</label
+                                >
+                                <div class="calc_result_value">
+                                    <span id="result-attendants-number-even">0</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,23 @@
+@media screen and (max-width:760px) {
+	.calc_form {
+		width: 100%;
+		max-width: 100%;
+		padding: 0 0px 0 0;
+		min-height: auto;
+	}
+	.calc_details_wrap {
+		padding: 0 15px;
+	}
+	.calculator_wrap {
+		padding: 15px 0;
+	}
+}
+@media screen and (max-width:460px) {
+	.calc_field.small {
+		width: 100%;
+	}
+	.calc_field_wrap.medium_6 {
+		width: 100%;
+		max-width: 100%;
+	}
+}
