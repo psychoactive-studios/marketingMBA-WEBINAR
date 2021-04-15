@@ -1,0 +1,264 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0064)http://buildmycode.com/i/marketing-mba/email-roi-calculator.html -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Email ROI Calculator</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="./Email ROI Calculator_files/font-awesome.min.css"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="./Email ROI Calculator_files/style.css"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="./Email ROI Calculator_files/responsive.css"
+      type="text/css"
+    />
+    <script src="./Email ROI Calculator_files/jquery.min.js.download"></script>
+    <script src="./Email ROI Calculator_files/email-roi-calculator.js.download"></script>
+  </head>
+  <body
+    data-new-gr-c-s-check-loaded="14.1006.0"
+    data-gr-ext-installed=""
+    style=""
+  >
+    <div class="page">
+      <div class="container">
+        <div class="calculator_wrap">
+          <h1>Email ROI Calculator</h1>
+          <div class="currency_wrap">
+            <div class="calc_field">
+              <label class="calc_label">Currency</label>
+              <div class="calc_field_wrap medium_3">
+                <select class="calc_input" id="currency">
+                  <option value="EUR" selected="selected">EUR</option>
+                  <option value="USD">USD</option>
+                  <option value="GBP">GBP</option>
+                  <option value="AED">AED</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="calc_details_wrap">
+            <div class="calc_form">
+              <h2>Assumptions</h2>
+              <div class="calc_field">
+                <label class="calc_label">Volume of e-mail sent</label>
+                <div class="calc_field_wrap">
+                  <input
+                    class="calc_input"
+                    type="number"
+                    value="10000"
+                    placeholder="Volume of e-mail sent"
+                    id="volume_sent"
+                  />
+                </div>
+              </div>
+              <div class="calc_field">
+                <label class="calc_label"
+                  >Cost of campaign (<span class="calc_currency currency_symbol"
+                    >€</span
+                  >)</label
+                >
+                <div class="calc_field_wrap">
+                  <input
+                    class="calc_input currency_field"
+                    type="text"
+                    value="1.000,00 €"
+                    placeholder="Cost of campaign"
+                    id="campaign_cost"
+                    data-val="1000"
+                  />
+                </div>
+              </div>
+              <div class="calc_field">
+                <label class="calc_label"
+                  >Average revenue per conversion (<span
+                    class="calc_currency currency_symbol"
+                    >€</span
+                  >)</label
+                >
+                <div class="calc_field_wrap">
+                  <input
+                    class="calc_input currency_field"
+                    type="text"
+                    value="50,00 €"
+                    placeholder="Average revenue per conversion"
+                    id="average_revenue"
+                    data-val="50"
+                  />
+                </div>
+              </div>
+              <div class="calc_field">
+                <label class="calc_label">Rate of email openings (%)</label>
+                <div class="calc_field_wrap">
+                  <input
+                    class="calc_input"
+                    type="number"
+                    value="21.8"
+                    placeholder="Rate of email openings"
+                    id="opening_rate"
+                  />
+                </div>
+              </div>
+              <div class="calc_field">
+                <label class="calc_label">Click through rate (%)</label>
+                <div class="calc_field_wrap">
+                  <input
+                    class="calc_input"
+                    type="number"
+                    value="12.8"
+                    placeholder="Click through rate"
+                    id="click_rate"
+                  />
+                </div>
+              </div>
+              <div class="calc_field">
+                <label class="calc_label">Conversion rate (%)</label>
+                <div class="calc_field_wrap">
+                  <input
+                    class="calc_input"
+                    type="number"
+                    value="36"
+                    placeholder="Conversion rate"
+                    id="conversion_rate"
+                  />
+                </div>
+              </div>
+              <div class="calc_field submit_wrap">
+                <button
+                  type="submit"
+                  class="calc_form_submit"
+                  id="calculate_eroi"
+                >
+                  Calculate
+                </button>
+              </div>
+            </div>
+            <div class="calc_form result">
+              <h2>Results</h2>
+              <div class="calc_field">
+                <div class="calc_field">
+                  <label class="calc_label"
+                    >Gross revenue acquired from e-mail leads (<span
+                      class="calc_currency currency_symbol"
+                      >€</span
+                    >)</label
+                  >
+                </div>
+                <div class="calc_result_value">
+                  <span class="gain_or_loss" id="gross_revenue">0</span>
+                </div>
+              </div>
+
+              <div class="calc_field border">
+                <div class="calc_field">
+                  <label class="calc_label"
+                    >Profit (<span class="calc_currency currency_symbol">€</span
+                    >)</label
+                  >
+                </div>
+                <div class="calc_result_value">
+                  <span class="gain_or_loss" id="profit">0</span>
+                </div>
+              </div>
+              <div class="calc_field background">
+                <label class="calc_label"
+                  >Retun on investment (ROI)<span class="calc_unit"
+                    >(%)</span
+                  ></label
+                >
+                <div class="calc_result_value">
+                  <span class="" id="eroi">0 %</span>
+                </div>
+              </div>
+
+              <div class="calc_field">
+                <label class="calc_label">Conversions to break even</label>
+                <div class="calc_result_value">
+                  <span id="conversion_even">0</span>
+                </div>
+              </div>
+
+              <div class="calc_field border">
+                <div class="calc_field">
+                  <label class="calc_label"
+                    >Cost per email opened (<span
+                      class="calc_currency currency_symbol"
+                      >€</span
+                    >)</label
+                  >
+                </div>
+                <div class="calc_result_value">
+                  <span id="cost_email_open">0</span>
+                </div>
+              </div>
+
+              <div class="calc_field border">
+                <div class="calc_field">
+                  <label class="calc_label"
+                    >Cost per email lead (<span
+                      class="calc_currency currency_symbol"
+                      >€</span
+                    >)</label
+                  >
+                </div>
+                <div class="calc_result_value">
+                  <span id="cost_email_lead">0</span>
+                </div>
+              </div>
+
+              <div class="calc_field border">
+                <div class="calc_field">
+                  <label class="calc_label"
+                    >Cost per conversion (<span
+                      class="calc_currency currency_symbol"
+                      >€</span
+                    >)</label
+                  >
+                </div>
+                <div class="calc_result_value">
+                  <span id="cost_conversion">0</span>
+                </div>
+              </div>
+
+              <div class="calc_field border">
+                <label class="calc_label">Number of email openings</label>
+                <div class="calc_result_value">
+                  <span id="email_open">0</span>
+                </div>
+              </div>
+
+              <div class="calc_field border">
+                <label class="calc_label">Click through number</label>
+                <div class="calc_result_value">
+                  <span id="click_through">0</span>
+                </div>
+              </div>
+
+              <div class="calc_field border">
+                <label class="calc_label">Expected conversion number</label>
+                <div class="calc_result_value">
+                  <span id="expexcted_conversion">0</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

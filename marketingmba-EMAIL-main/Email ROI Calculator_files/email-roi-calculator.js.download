@@ -1,0 +1,94 @@
+$(document).ready(function(){	
+	$('#calculate_eroi').click( function(){
+		var currency_symbols = { 'EUR': "€", 'USD': "$", 'GBP': "£", 'AED': "د.إ" },
+			$that 					= $(this),
+			volume_sent 			= $('#volume_sent').val(),
+			campaign_cost 			= $('#campaign_cost').attr('data-val'),
+			average_revenue 		= $('#average_revenue').attr('data-val'),
+			opening_rate 			= $('#opening_rate').val(),
+			click_rate 				= $('#click_rate').val(),
+			conversion_rate 		= $('#conversion_rate').val(),
+			currency 				= $('#currency').val(),
+			
+			data 					= { 
+				'volume_sent' 		: volume_sent, 
+				'campaign_cost' 	: campaign_cost, 	
+				'average_revenue'	: average_revenue,
+				'opening_rate'		: opening_rate / 100,
+				'click_rate'		: click_rate / 100 ,
+				'conversion_rate'	: conversion_rate / 100,		
+				'currency'			: currency,
+				'currency_symbol'	: currency_symbols[currency],
+				
+			};
+			
+		calculated_data = EROI.Calculator( data );
+		EROI.setData( calculated_data );			
+		return false;
+	});
+	
+	$('.currency_field').on( "focus", function(){
+		val = $(this).attr('data-val');
+		$(this).val( val );
+	});
+	$('.currency_field').on( "keyup", function(){
+		val = $(this).val();
+		$(this).attr('data-val', val);		
+	});
+	$(document).on( "blur load", '.currency_field', function(){
+		val 			= $(this).attr('data-val');
+		currency 		= $('#currency').val()
+		formated_val 	= EROI.formatCurrencyField( val, currency );
+		$(this).val(formated_val);		
+	});
+	
+});
+
+var EROI = {
+	Calculator: function( data ){
+		data.email_open 				= Math.round( data.volume_sent * data.opening_rate );
+		data.click_through 				= Math.round( data.click_rate * data.email_open );
+		data.expexcted_conversion 		= Math.round( data.conversion_rate * data.click_through );
+		data.gross_revenue				= data.average_revenue * data.expexcted_conversion;
+		data.profit						= data.gross_revenue - data.campaign_cost;		
+		data.eroi						= data.profit / data.campaign_cost * 100 ;
+		data.conversion_even			= data.campaign_cost / data.average_revenue;		
+		data.cost_email_open			= data.campaign_cost / data.email_open;
+		data.cost_email_lead			= data.campaign_cost / data.click_through;
+		data.cost_conversion			= data.campaign_cost / data.expexcted_conversion;
+				
+		return data;
+	},
+	setData: function( data ){
+		console.log(data);
+		$('#gross_revenue').html( EROI.formatCurrencyField( data.gross_revenue, data.currency ) );
+		$('#profit').html( EROI.formatCurrencyField( data.profit, data.currency ) );
+		$('#eroi').html( Math.ceil( data.eroi )+'%' );
+		$('#conversion_even').html( Math.ceil( data.conversion_even ) );
+		$('#cost_email_open').html( EROI.formatCurrencyField( data.cost_email_open, data.currency ) );
+		$('#cost_email_lead').html( EROI.formatCurrencyField( data.cost_email_lead, data.currency ) );
+		$('#cost_conversion').html( EROI.formatCurrencyField( data.cost_conversion, data.currency ) );
+		$('#email_open').html( EROI.formatNumberField(data.email_open) );
+		$('#click_through').html( EROI.formatNumberField ( data.click_through ) );
+		$('#expexcted_conversion').html( EROI.formatNumberField ( data.expexcted_conversion ) );
+		$('.currency_symbol').html(  data.currency_symbol  );
+	},
+	
+	format_number: function( data, points ){
+		return data.toFixed(points).replace(/(\d)(?=(\d{3})+\.)/g, "$1,");
+	},
+		
+	formatCurrencyField: function( val, currency ){		
+		 var formated_val = new Intl.NumberFormat( 'de-DE' , {
+			style: "currency",
+			currency: currency
+		}).format(val);
+		return formated_val;
+	},
+	
+	formatNumberField: function( val ){		
+		 var formated_val = new Intl.NumberFormat( 'de-DE' , {
+		}).format(val);
+		return formated_val;
+	}
+}
